@@ -2162,6 +2162,7 @@ async def main():
             bots.append(bot_instance)
     for b in bots:
         try:
+            await b.delete_webhook(drop_pending_updates=True)
             me = await b.get_me()
             bot_usernames.append(me.username)
             print(f"{GREEN}✅ CONNECTED SUCCESSFULLY: @{me.username}{RESET}")
