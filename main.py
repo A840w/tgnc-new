@@ -10,11 +10,12 @@ import sys
 import urllib.parse
 import textwrap
 from collections import OrderedDict
-
+import threading
 
 import aiohttp
 from aiogram.types import BufferedInputFile, ChatMemberUpdated
-
+from fastapi import FastAPI
+import uvicorn
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command, CommandObject
 from aiogram.exceptions import TelegramBadRequest, TelegramRetryAfter
@@ -57,6 +58,18 @@ COMMAND_TIMEOUT = 100
 MAX_CACHE_SIZE = 5000
 
 bot_start_time = time.time()
+
+app = FastAPI()
+
+
+@app.get("/")
+def home():
+    return {"status": "Giga Bot is alive and running!"}
+
+def run_web():
+    port = int(os.getenv("PORT", 8080))
+    uvicorn.run(app, host="0.0.0.0", port=port)
+
 
 def get_uptime():
     """Calculates and formats the total uptime of the bot script."""
@@ -2044,10 +2057,10 @@ async def callback_query_handler(query: types.CallbackQuery, bot: Bot):
 @dp.channel_post()
 @dp.message()
 
-async def periodic_db_saver(interval_seconds=300):
+async def periodic_db_saver(interval_secondss=300):
     """Automatically saves the database every 5 minutes in the background."""
     while True:
-        await asyncio.sleep(interval_seconds)
+        await asyncio.sleep(interval_secondss)
         try:
             save_db()
             print(f"{GREEN}💾 Auto-saved database successfully.{RESET}")
@@ -2159,6 +2172,7 @@ async def main():
     await dp.start_polling(*bots, drop_pending_updates=True)
 
 if __name__ == "__main__":
+    threading.Thread(target=run_web, daemon=True).start()
     try:
         asyncio.run(main())
     except (KeyboardInterrupt, SystemExit):
