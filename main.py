@@ -91,8 +91,8 @@ TOKENS = [ "8700396203:AAFQjYDwhVnFj6FJwCc6LIxmlV58WIeVTtQ",
 "8810930683:AAHXOWLQPqg2FTEB4xZpP6k0S2iiZLyyJ2s"
 ]
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://qjvpxgqzqjvpxgqz.supabase.co")
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "sb_publishable_3WvyVPuiiB0M2MNDscTmfw_vkk-m8jH")
+SUPABASE_URL = "https://snakgjcdkidrgsjzcnuj.supabase.co"
+SUPABASE_KEY = "sb_publishable_3WvyVPuiiB0M2MNDscTmfw_vkk-m8jH"
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 OWNER_ID = 8435455218
