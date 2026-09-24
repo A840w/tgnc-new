@@ -2057,7 +2057,8 @@ async def callback_query_handler(query: types.CallbackQuery, bot: Bot):
 @dp.channel_post()
 @dp.message()
 
-async def periodic_db_saver(interval_secondss=300):
+async def periodic_db_saver(interval_secondss):
+    interval_secondss = 300  # 5 minutes
     """Automatically saves the database every 5 minutes in the background."""
     while True:
         await asyncio.sleep(interval_secondss)
