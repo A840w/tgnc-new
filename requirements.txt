@@ -1,0 +1,5 @@
+aiogram==3.18.0
+supabase
+aiohttp
+fastapi
+uvicorn
