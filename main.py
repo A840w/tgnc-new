@@ -2170,7 +2170,7 @@ async def main():
         except Exception as e:
             print(f"{RED}❌ Error starting a bot: {e}{RESET}")
     print(f"\n{GREEN}giga V3 STARTED!{RESET}\n")
-    asyncio.create_task(periodic_db_saver())
+    asyncio.create_task(periodic_db_saver(interval_secondss=300))
     await dp.start_polling(*bots, drop_pending_updates=True)
 
 if __name__ == "__main__":
